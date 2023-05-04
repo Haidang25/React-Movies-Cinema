@@ -10,15 +10,40 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AppleIcon from "../../images/apple.ico";
+import userApi from "../../api/modules/user.api";
+import { Link } from "react-router-dom";
 const SignIn = () => {
   const [values, setValues] = useState({
     password: "",
     showPassword: false,
   });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const handleChange = (prop) => (event) => {
+    setPassword(event.target.value);
     setValues({ ...values, [prop]: event.target.value });
-  };
+  }
+  const handleChangeUser = (e) => {
+    setUsername(e.target.value);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await userApi.signIn({
+        username: username,
+        password: password,
+      });
+      console.log(response);
+      localStorage.setItem("username", JSON.stringify(response.username));
+      localStorage.setItem("idUser", JSON.stringify(response._id));
+      alert("Login success !");
+      window.location.reload();
+    }
+    catch(err) {
+      alert("Login fail !");
 
+    }
+  }
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -32,34 +57,12 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="login__main">
+      <div className="login__main" >
         <div className="login__row row ">
           <div className="login__right card">
             <div className="form__login">
-              <div className="login__title">
-                <h2>Create your free account</h2>
-                <p>No credit card required.</p>
-              </div>
               <div className="login__btns">
-                <div className="google__login">
-                  <button className="google">
-                    {" "}
-                    <img src={GoogleIcon} width="20" alt="" /> Continue with
-                    Google
-                  </button>
-                </div>
-                <div className="apple__login">
-                  <button className="apple">
-                    {" "}
-                    <img src={AppleIcon} width="20" alt="" /> Continue with
-                    Apple
-                  </button>
-                </div>
-                <div className="or__line">
-                  <p className="span-h"></p>
-                  <p className="span-p"> or</p>
-                  <p class="span-k"></p>
-                </div>
+                <h1 style={{backgroundColor: 'green', color: 'white', padding: 5, borderRadius: 6}}>Login</h1>
                 <Box
                   component="form"
                   noValidate
@@ -91,14 +94,10 @@ const SignIn = () => {
                 >
                   <div className="sign_name">
                     <h5>Username</h5>
-                    <TextField
-                      sx={{}}
-                      fullWidth
-                      id="standard-basic"
-                      className=""
-                      variant="filled"
-                      focused
-                      size="small"
+                    <FilledInput
+                     id="filled-adornment-username"
+                     value={username}
+                     onChange={handleChangeUser}
                     />
                   </div>
                   <div className="sign_pass">
@@ -129,12 +128,14 @@ const SignIn = () => {
                       />
                     </FormControl>
                   </div>
+                  <div className="form-group">
+                      <button type="submit" onClick={handleSubmit}style={{width: '100%'}}>Login</button>
+                  </div>
                 </Box>
                 <div className="new__acc">
-                  <button>Create An Account</button>
-                  <p>
-                    Aready have an Account? <b>Sign in</b>
-                  </p>
+                  <Link to="/signup">
+                    <button>Create An Account</button>
+                  </Link>
                 </div>
               </div>
             </div>

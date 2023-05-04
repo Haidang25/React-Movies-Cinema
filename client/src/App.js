@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Myloader from "react-spinners/ClipLoader";
 import mySvg from "./images/hbo-max.svg";
 import RoutesAuth from "./config/Routes/RoutesAuth";
+import SignUpAuth from "./config/Routes/SignUpAuth";
 import NotFound from "./pages/Errors/NotFound";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Switch>
             <Route exact path="/error" component={NotFound} />
             <Route path="/(login)" exact component={RoutesAuth} />
+            <Route path="/(signup)" exact component={SignUpAuth} />
             <Route path="/" component={Routes} />
           </Switch>
         </BrowserRouter>

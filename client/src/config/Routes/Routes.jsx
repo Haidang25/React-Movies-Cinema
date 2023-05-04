@@ -8,7 +8,7 @@ import MainNav from "../../components/MainNavbar/MainNav";
 import Footer from "../../components/Footer/Footer";
 import CopyWrite from "../../components/CopyWrite__footer/LastFooter";
 import BottomNav from "../../components/MainNavbar/BottomNav";
-
+import SignUp from "../../components/SignUp/SignUp";
 const Routes = () => {
   return (
     <>

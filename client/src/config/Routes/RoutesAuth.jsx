@@ -7,6 +7,8 @@ const RoutesAuth = () => {
       {" "}
       <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/Login" component={SignIn} exact />
+
+
     </>
   );
 };

@@ -11,7 +11,7 @@ const LastFooter = () => {
         <div className="container2 ">
           <span>
             © 2022 CinemyPlex. All Rights Reserved. Designed by{" "}
-            <a href="https://jameswaweru.herokuapp.com/">James Waweru</a>.
+            <a href="https://github.com/Haidang25">Haidang25</a>.
           </span>
           <h6 href="w" className="scroll-to-top">
             <span id="toTop">Back to top &#8593;</span>

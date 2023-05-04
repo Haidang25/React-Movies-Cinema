@@ -1,6 +1,6 @@
 import Heading from "../Header/Heading";
 import "./MainNav.css";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import HomeIcon from "../../images/home-icon.svg";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
@@ -16,6 +16,12 @@ $(function () {
 });
 
 const MainNav = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("username")));
+  console.log(user);
+  const handleClickLogout = (e) => {
+    localStorage.removeItem('username');
+    setUser(null);
+  }
   return (
     <>
       <nav className="navbar navbar-expand navbar-light fixed-top">
@@ -90,9 +96,17 @@ const MainNav = () => {
 
           <div className="all__right">
             <div className="btn-login">
-              <Link to="/login">
-                <button className=" login-btn">login</button>
-              </Link>
+              {
+                user !== null
+                  ?
+                  <Link to="#" onClick={handleClickLogout}>
+                    <button style={{ fontWeight: 'bold' }}>{user}</button>
+                  </Link>
+                  :
+                  <Link to="/login">
+                    <button className=" login-btn">login</button>
+                  </Link>
+              }
             </div>
           </div>
         </div>
